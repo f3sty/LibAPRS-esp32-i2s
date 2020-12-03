@@ -1,7 +1,7 @@
 #include <string.h>
 #include "AFSK.h"
 #include "LibAPRS.h"
-#include "FakeArduino.h"
+#include <Arduino.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "driver/gpio.h"
@@ -126,7 +126,7 @@ static void AFSK_txStart(Afsk *afsk) {
       afsk->tailLength = DIV_ROUND(custom_tail * BITRATE, 8000);
     }
 
-    printf("AFSK_txStart\n");
+   // printf("AFSK_txStart\n");
 }
 
 #define TX_SAMPLE_BUFLEN (8 * CONFIG_AFSK_DAC_SAMPLERATE / BITRATE)
@@ -215,7 +215,7 @@ void finish_transmission() {
             portMAX_DELAY
         ));
     }
-    printf("custom_preamble: %ld, custom_tail: %ld\n", custom_preamble, custom_tail);
+    // printf("custom_preamble: %ld, custom_tail: %ld\n", custom_preamble, custom_tail);
     gpio_set_level(GPIO_PTT_OUT, 1);
     // ESP_ERROR_CHECK(i2s_zero_dma_buffer(I2S_NUM_0));
 }

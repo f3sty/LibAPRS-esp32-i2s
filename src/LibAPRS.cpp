@@ -1,7 +1,9 @@
-#include "FakeArduino.h"
+#include <Arduino.h>
 #include "AFSK.h"
 #include "AX25.h"
 #include "LibAPRS.h"
+#include <stdlib.h>
+#include <stdint.h>
 
 // Afsk modem;
 AX25Ctx AX25;
@@ -219,6 +221,12 @@ void APRS_sendPkt(void *_buffer, size_t length) {
 
     ax25_sendVia(&AX25, path, countof(path), buffer, length);
 }
+
+void APRS_sendRaw(void *_buffer, size_t length) {
+  uint8_t *buffer = (uint8_t *)_buffer;
+  ax25_sendRaw(&AX25, buffer, length);	
+}
+
 
 // Dynamic RAM usage of this function is 30 bytes
 void APRS_sendLoc(void *_buffer, size_t length) {

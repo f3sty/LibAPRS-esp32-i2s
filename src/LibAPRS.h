@@ -1,6 +1,7 @@
-// #include "FakeArduino.h"
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <Arduino.h>
 
 #include "FIFO.h"
 #include "CRC-CCIT.h"
@@ -36,6 +37,7 @@ void APRS_setGain(int s);
 void APRS_setDirectivity(int s);
 
 void APRS_sendPkt(void *_buffer, size_t length);
+void APRS_sendRaw(void *_buffer, size_t length);
 void APRS_sendLoc(void *_buffer, size_t length);
 void APRS_sendMsg(void *_buffer, size_t length);
 void APRS_msgRetry();

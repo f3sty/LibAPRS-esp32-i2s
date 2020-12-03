@@ -1,6 +1,6 @@
 // Based on work by Francesco Sacchi
 
-#include "FakeArduino.h"
+#include <Arduino.h>
 #include <string.h>
 #include <ctype.h>
 #include "AX25.h"
@@ -119,6 +119,7 @@ void ax25_sendRaw(AX25Ctx *ctx, void *_buf, size_t len) {
     ax25_putchar(ctx, crch);
 
     afsk_putchar(HDLC_FLAG);
+    finish_transmission();
 }
 
 static void ax25_sendCall(AX25Ctx *ctx, const AX25Call *addr, bool last){
@@ -138,6 +139,7 @@ static void ax25_sendCall(AX25Ctx *ctx, const AX25Call *addr, bool last){
 
     uint8_t ssid = 0x60 | (addr->ssid << 1) | (last ? 0x01 : 0);
     ax25_putchar(ctx, ssid);
+
 }
 
 void ax25_sendVia(AX25Ctx *ctx, const AX25Call *path, size_t path_len, const void *_buf, size_t len) {
@@ -163,5 +165,5 @@ void ax25_sendVia(AX25Ctx *ctx, const AX25Call *path, size_t path_len, const voi
     ax25_putchar(ctx, crch);
 
     afsk_putchar(HDLC_FLAG);
-    finish_transmission();
+    
 }
